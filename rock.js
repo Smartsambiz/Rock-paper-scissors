@@ -1,84 +1,117 @@
+
+  
+
 function getComputerChoice(){
     const computerSelection = ["Rock", "Paper", "Scissors"]
-  generate = Math.floor(Math.random() * computerSelection.length) + 1;
+    generate = Math.floor(Math.random() * computerSelection.length);
  
-  if(generate === 1){ 
-    return "Rock";
- } if (generate === 2) {
-    return "Paper";
- } if (generate === 3) {
-    return "Scissors";
- }
- return computerSelection;
+ return computerSelection[generate];
 }
-  
-let input1 = "Rock", input2 = "Paper", input3 = "Scissors";
 
-function playRound (playerSelection, computerSelection){
- 
-   if (playerSelection.toLowerCase() === input1.toLowerCase()) {  
-    if (computerSelection === "Rock") {
-      return "It is a tie!!";
-    } else if (computerSelection === "Paper") {
-        return "Computer Wins";
+
+let result;
+
+function playRound (playerSelection, computerPlay){
+   computerPlay = getComputerChoice();
+
+   if (playerSelection === "Rock") {  
+    if (computerPlay === "Rock") {
+      result ="It is a tie!!";
+    } else if (computerPlay === "Paper") {
+        result ="Computer Wins";
       } else {
-        return "You Win!";
+        result ="You Win!";
       }
   }
   
-  if (playerSelection.toLowerCase() === input2.toLowerCase()) {  
-    if (computerSelection === "Paper") {
-      return "It is a tie!";
-    } else if (computerSelection === "Scissors") {
-        return "Computer Wins";
+  if (playerSelection === "Paper") {  
+    if (computerPlay === "Paper") {
+      result ="It is a tie!";
+    } else if (computerPlay === "Scissors") {
+        result = "Computer Wins";
       } else  {
-        return "You Win!";
+        result ="You Win!";
       }
   } 
   
-  else if (playerSelection.toLowerCase() === input3.toLowerCase()){
-    if (computerSelection === "Scissors") {
-      return "It's a tie";
-  }else if (computerSelection === "Rock") {
-      return "Computer Wins";
+  else if (playerSelection === "Scissors"){
+    if (computerPlay === "Scissors") {
+      result = "It's a tie";
+  }else if (computerPlay === "Rock") {
+      result = "Computer Wins";
   }
   else {
-      return "You Win!";
+      result= "You Win!";
   }
   }
 
+  //const resultDiv = document.querySelector("#result");
+ //resultDiv.textContent = `You chose "${playerSelection}", computer chose "${computerPlay}"."${result}"`;
+//resultDiv.style.cssText = 'color: red; width; font-size: 30px;'
+};
+
+
+
+
+function endGame(playerScore, computerScore) {
+  let buttons = document.querySelectorAll("#playerSelection")
+  const resultDiv = document.querySelector("#result");
+
+  if (playerScore > computerScore) {
+    resultDiv.textContent = "Congratulations, you won the game!";
+  } else if (playerScore < computerScore){
+    resultDiv.textContent = "Sorry, computer won the game!";
+  } else {
+    resultDiv.textContent = "it's a tie Game!";
+  }
+  // Disable buttons
+ buttons.forEach((button) => {
+    button.disabled = true;
+  });
 }
 
 
 
 
+
+function game(){
+
+  let playerScore = 0;
+  let computerScore = 0;
+
+  const buttons = document.querySelectorAll('#playerSelection');
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      let  playerSelection = button.dataset.choice;
+       playRound(playerSelection);
+
+
+      
+      const resultDiv = document.querySelector("#result");
+      resultDiv.textContent = ` ${result};`
+      
+  
+      // Update UI with scores
+      if(result === "You Win!"){
+        const scoreDiv = document.querySelector("#score");
+        scoreDiv.textContent = `Player: ${playerScore++} Computer: ${computerScore}`;
+      } else if(result === "Computer Wins"){
+        const scoreDiv = document.querySelector("#score")
+        scoreDiv.textContent = ` Player: ${playerScore}, Computer: ${computerScore++}`;
+      }
     
-    function game(){
-      let playerScore = 0;
-      let computerScore = 0;
-
-      for (let i = 0; i< 5; i ++){
-        const computerSelection = getComputerChoice();
-        const playerSelection= prompt ("Input your selection: ");
-        var result = playRound(playerSelection, computerSelection);
-        alert(result);
-
-        if (result === "You Win!") {
-          playerScore++;
-        } else if (result === "Computer Wins"){
-          computerScore++;
-        }
+      
+  
+      // Check for end of game
+      if (playerScore === 5 || computerScore === 5) {
+        endGame(playerScore, computerScore);
       }
-
-      if (playerScore > computerScore){
-        alert("You win the game!");
-      } else if (playerScore < computerScore){
-        alert("Computer wins the game!")
-      } else {
-        alert("It's a tie game!");
-      }
-    }
+    });
+    });
+  
+};
 
 
-  game();
 
+
+game();

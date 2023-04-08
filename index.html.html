@@ -4,13 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src ="rock.js"> </script>
+   <link rel="stylesheet" href="rock.css">
     <title>Rock, Paper, Scissors</title>
 </head>
 <body>
     ROCK, PAPER AND SCISSORS GAME
 
     <h1>LETS BEGIN</h1>
-    <button onclick="game()">CLICK TO START</button>
+    <button  id="playerSelection" data-choice="Rock"> Rock </button>
+    <button id="playerSelection" data-choice="Paper"> Paper </button>
+    <button id="playerSelection" data-choice="Scissors"> Scissors</button>
+
+    <div id="result"></div>
+    <div id="score"></div>
+    
+
+
+    <script src ="rock.js"> </script>
 </body>
 </html>
