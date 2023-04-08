@@ -12,7 +12,17 @@ button {
     background-color: #ddd;
   }
 
-  div {
+  #result, #gameWinner {
+    font-size: 24px;
+    margin: 20px;
+  }
+  
+  #score {
+    font-size: 20px;
+    margin: 20px;
+  }
     
 
+  body {
+    text-align: center;
   }

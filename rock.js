@@ -55,14 +55,12 @@ function playRound (playerSelection, computerPlay){
 
 function endGame(playerScore, computerScore) {
   let buttons = document.querySelectorAll("#playerSelection")
-  const resultDiv = document.querySelector("#result");
+  const resultDiv = document.querySelector("#gameWinner");
 
   if (playerScore > computerScore) {
     resultDiv.textContent = "Congratulations, you won the game!";
-  } else if (playerScore < computerScore){
-    resultDiv.textContent = "Sorry, computer won the game!";
   } else {
-    resultDiv.textContent = "it's a tie Game!";
+    resultDiv.textContent = "Sorry, computer won the game!";
   }
   // Disable buttons
  buttons.forEach((button) => {
@@ -88,7 +86,10 @@ function game(){
 
       
       const resultDiv = document.querySelector("#result");
+      const scoreDiv = document.querySelector("#score")
       resultDiv.textContent = ` ${result};`
+      scoreDiv.textContent= `Player: ${playerScore} Computer: ${computerScore}`;
+
       
   
       // Update UI with scores
@@ -99,6 +100,8 @@ function game(){
         const scoreDiv = document.querySelector("#score")
         scoreDiv.textContent = ` Player: ${playerScore}, Computer: ${computerScore++}`;
       }
+
+      scoreDiv.textContent = `Player: ${playerScore}, Computer: ${computerScore}`;
     
       
   
